@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use File;
 
 class ProductController extends Controller
 {
@@ -124,5 +125,40 @@ return view('products.index',compact('products'))
         $product->delete();
         return redirect()->route('products.index')
         ->with('success','Product deleted successfully');
+    }
+
+    public function imagelist(Product $product)
+    {
+       // print_r($product->id); 
+        echo $product['id'];
+        die();
+        $path = 'images/'.$product->id.'/';
+        if (! File::exists(public_path().'/'.$path)) 
+        {
+            File::makeDirectory(public_path().'/'.$path,0777,true);
+        }
+        return view('products.images.index', compact('product'));
+    }
+
+    public function imageupload()
+    {
+        return view('products.images.create');
+    }
+
+    public function storeimages(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $imageName = time().'.'.$request->image->extension();  
+     
+        $request->image->move(public_path('images'), $imageName);
+  
+        /* Store $imageName name in DATABASE from HERE */
+    
+        return back()
+            ->with('success','You have successfully upload image.')
+            ->with('image',$imageName); 
     }
 }

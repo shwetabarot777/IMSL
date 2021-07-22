@@ -42,3 +42,7 @@ Route::get('send-mail', function () {
    
     dd("Email is Sent.");
 });
+
+Route::get('imagelist/{p_id}', [ ProductController::class, 'imagelist' ])->name('products.images.index');
+Route::get('uploadimages', [ ProductController::class, 'imageupload' ])->name('products.images.create');
+Route::post('storeimages', [ ProductController::class, 'storeimages' ])->name('products.storeimages');

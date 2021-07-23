@@ -7,7 +7,7 @@
 	<div class="col-lg-12 margin-tb">
 
 		<div class="pull-left">
-			<h2>Product Images List</h2>
+			<h2> <!--  {{ $product->product_name }}  -->Images List</h2>
 		</div>
 		
 		<div class="pull-right">
@@ -23,6 +23,17 @@
 </div>
 
 @endif
+
+<?php
+
+
+$path='images/'.$p_id;
+?>
+
+@foreach(File::glob(public_path($path).'/*') as $path)
+   <img src="{{ str_replace(public_path(), '', $path) }}">
+@endforeach
+
 
 @endsection
 

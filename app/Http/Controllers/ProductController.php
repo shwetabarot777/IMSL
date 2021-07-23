@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use File;
+//use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -127,17 +128,24 @@ return view('products.index',compact('products'))
         ->with('success','Product deleted successfully');
     }
 
-    public function imagelist(Product $product)
+    public function imagelist($p_id,Product $product)
     {
-       // print_r($product->id); 
-        echo $product['id'];
-        die();
-        $path = 'images/'.$product->id.'/';
+        
+        $path = 'images/'.$p_id.'/';
         if (! File::exists(public_path().'/'.$path)) 
         {
             File::makeDirectory(public_path().'/'.$path,0777,true);
         }
-        return view('products.images.index', compact('product'));
+
+
+       // $files = Storage::allFiles($path);
+
+        //return view('products.images.index', compact('p_id','product'));
+
+        //return View::make('user')->with($data);
+
+         return view('products.images.index',compact('product','p_id'));
+
     }
 
     public function imageupload()

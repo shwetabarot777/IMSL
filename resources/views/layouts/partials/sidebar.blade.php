@@ -55,6 +55,33 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/importExportView" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                Product Import/Export
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/send-mail" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                Send Email Demo
+              </p>
+            </a>
+          </li>
+<li class="nav-item">
+            <a href="file:///C:/xampp/htdocs/IMSL1/public/assets/AdminLTE-3.1.0/index.html" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                Theme Demo
+              </p>
+            </a>
+          </li>
+
+
          
         </ul>
       </nav>

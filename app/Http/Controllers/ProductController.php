@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use File;
+use DataTables;
 //use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -21,6 +22,36 @@ return view('products.index',compact('products'))
 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
+    public function getProducts(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data = Product::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action',function ($data){
+                    return $this->getActionColumn($data);
+                }) 
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+     protected function getActionColumn($data): string
+    {
+        $showUrl = route('products.show', $data->id);
+            $editUrl = route('products.edit', $data->id);
+            $imageUrl = route('products.images.index', $data->id);
+            $delUrl = route('products.destroy', $data->id);
+
+            return "
+            <a class='waves-effect btn btn-success' data-value='$data->id' href='$showUrl'> Show</a> 
+            <a class='waves-effect btn btn-primary' data-value='$data->id' href='$editUrl'>Edit</a>
+            <a class='waves-effect btn btn-danger' data-value='$data->id' href='$delUrl'>Delete</a>
+              <a class='waves-effect btn btn-warning' data-value='$data->id' href='$imageUrl'>Images</a>
+
+
+                        ";
+    }
     /**
      * Show the form for creating a new resource.
      *

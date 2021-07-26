@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\IeController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +17,13 @@ use App\Http\Controllers\IeController;
 |
 */
 
-Route::get('/', function () {
-    return view('products.index');
-    //return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::resource('products', ProductController::class);
+
+Route::get('products.list', [ProductController::class, 'getProducts'])->name('products.list');
+
 
 Route::resource('forms', FormsController::class);
 
@@ -34,7 +36,7 @@ Route::post('import', [IeController::class, 'import'])->name('import');
 Route::get('send-mail', function () {
    
     $details = [
-        'title' => 'Mail from ItSolutionStuff.com',
+        'title' => 'Mail from Shweta ',
         'body' => 'This is for testing email using smtp'
     ];
    
@@ -46,3 +48,6 @@ Route::get('send-mail', function () {
 Route::get('imagelist/{p_id}', [ ProductController::class, 'imagelist' ])->name('products.images.index');
 Route::get('uploadimages', [ ProductController::class, 'imageupload' ])->name('products.images.create');
 Route::post('storeimages', [ ProductController::class, 'storeimages' ])->name('products.storeimages');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

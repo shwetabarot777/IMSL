@@ -1,5 +1,7 @@
-@extends('layout.mainlayout')
-
+@extends('layouts.app', [
+'class' => '',
+'elementActive' => 'home'
+])
 @section('content')
 
 <div class="row">

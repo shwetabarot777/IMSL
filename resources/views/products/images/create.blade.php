@@ -1,4 +1,7 @@
-@extends('layout.mainlayout')
+@extends('layouts.app', [
+'class' => '',
+'elementActive' => 'home'
+])
 <div class="panel panel-primary">
       <div class="panel-heading"><h2>Image Upload</h2></div>
       <div class="panel-body">

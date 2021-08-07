@@ -5,6 +5,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\IeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +19,19 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [LoginController::class, 'index']);
+
+Route::group(
+    ['prefix'=>'admin/','middleware'=>'auth'],function(){
+        Route::get('/',[AdminController::class,'admin'])->name('admin');
+    } 
+);
+
+Auth::routes(['register' => false]);
+
+
+
+
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::resource('products', ProductController::class);

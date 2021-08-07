@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::latest()->paginate(5);
-return view('products.index',compact('products'))
+return view('backend.products.index',compact('products'))
 ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -60,7 +60,7 @@ return view('products.index',compact('products'))
     public function create()
     {
         //
-        return view('products.create');
+        return view('backend.products.create');
     }
 
     /**
@@ -102,7 +102,7 @@ return view('products.index',compact('products'))
      */
     public function show(Product $product)
     {
-        return view('products.show',compact('product'));    }
+        return view('backend.products.show',compact('product'));    }
 
     /**
      * Show the form for editing the specified resource.
@@ -112,7 +112,7 @@ return view('products.index',compact('products'))
      */
     public function edit(Product $product)
     {
-        return view('products.edit',compact('product'));
+        return view('backend.products.edit',compact('product'));
     }
 
     /**
@@ -175,13 +175,13 @@ return view('products.index',compact('products'))
 
         //return View::make('user')->with($data);
 
-         return view('products.images.index',compact('product','p_id'));
+         return view('backend.products.images.index',compact('product','p_id'));
 
     }
 
     public function imageupload()
     {
-        return view('products.images.create');
+        return view('backend.products.images.create');
     }
 
     public function storeimages(Request $request)

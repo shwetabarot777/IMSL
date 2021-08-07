@@ -15,7 +15,7 @@ class FormsController extends Controller
     public function index()
     {
         $forms = forms::latest()->paginate(5);
-        return view('forms.index',compact('forms'))
+        return view('backend.forms.index',compact('forms'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -26,7 +26,7 @@ class FormsController extends Controller
      */
     public function create()
     {
-        return view('forms.create');
+        return view('backend.forms.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class FormsController extends Controller
      */
     public function show(forms $forms)
     {
-        return view('forms.show',compact('forms'));    
+        return view('backend.forms.show',compact('forms'));    
     }
 
     /**
@@ -67,7 +67,7 @@ class FormsController extends Controller
      */
     public function edit(forms $forms)
     {
-        return view('forms.edit',compact('forms'));
+        return view('backend.forms.edit',compact('forms'));
     }
 
     /**

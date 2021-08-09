@@ -8,7 +8,7 @@
     
 @endpush
 
-@extends('layouts.app', [
+@extends('backend.layouts.app', [
     'class' => '',
     'elementActive' => 'home'
 ])

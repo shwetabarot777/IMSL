@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     /**
@@ -23,8 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $elementActive ="Home";
-         return view('pages.home');
+        return redirect()->route(auth()->user()->role);
+
+       /* $elementActive ="Home";
+         return view('backend.pages.home');*/
     }
     /**
      * Show the application contact.
@@ -33,6 +35,6 @@ class HomeController extends Controller
      */
     public function contact()
     {
-        return view('pages.contact');
+        return view('backend.pages.contact');
     }
 }

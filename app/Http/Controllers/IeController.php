@@ -14,7 +14,7 @@ class IeController extends Controller
     */
     public function importExportView()
     {
-       return view('importexport.import');
+       return view('backend.importexport.import');
     }
      
     /**

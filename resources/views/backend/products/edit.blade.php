@@ -1,130 +1,207 @@
 @extends('backend.layouts.app', [
-    'class' => '',
-    'elementActive' => 'home'
-])
+'class' => '',
+'elementActive' => 'home'
+]);
+@push('styles')
+
+@endpush
+
+@push('scripts')
+
+@endpush
+
 @section('content')
-<div class="row">
-	<div class="col-lg-12 margin-tb">
-		<div class="pull-left">
-			<h2>Edit Product</h2>
-		</div>
-		<div class="pull-right">
-			<a class="btn btn-primary" href="{{ route('products.index') }}"> Back</a>
-		</div>
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Products</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item "><a href="/products">Products</a></li>
+						<li class="breadcrumb-item active">Edit</li>
+					</ol>
+				</div>
+			</div>
+		</div><!-- /.container-fluid -->
+	</section>
+
+	<!-- Main content -->
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header">
+							<h3 class="card-title"> Edit Product</h3>
+							@if ($message = Session::get('success'))
+
+							<div class="alert alert-success">
+								<p>{{ $message }}</p>
+							</div>
+
+							@endif
+							<div class="pull-right" style="float:right;">
+								<a class="btn btn-primary" href="{{ route('products') }}"> Back</a>
+							</div>
+							@if ($errors->any())
+							<div class="alert alert-danger">
+								<strong>Warning!</strong> There were some problems with your input.<br><br>
+								<ul>
+									@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+							@endif
+						</div>
+						<!-- /.card-header -->
+						<div class="card-body">
+							 <form action="{{ route('admin.products.update',$product->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+     
+
+
+							
+							
+								<div class="row">
+									
+
+									<div class="col-xs-12 col-sm-12 col-md-12">
+										<div class="form-group">
+											<strong>Product Name:</strong>
+											<input type="text" class="form-control"  name="product_name" placeholder="product_name" value="{{ $product->product_name }}"> 
+										</div>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-6">
+										<div class="form-group">
+											<strong>Category :</strong>
+											<select type="text" name="category" class="form-control">
+                                        <option value="">None</option>
+                                        @if($categories)
+                                            @foreach($categories as $item)
+                                                <?php $dash=''; ?>
+                                                <option value="{{$item->id}}" @if($product->category == $item->id ) selected @endif>{{$item->title}}</option>
+                                                @if(count($item->subcategory))
+                                                    @include('backend/products/sub-category-list-option-for-update',['subcategories' => $item->subcategory])
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </select>
+
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-6">
+										<div class="form-group">
+											<strong>Part No :</strong>
+											<input type="text" class="form-control"  name="part_no" placeholder="part_no" value="{{ $product->part_no;}}"> 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-6">
+										<div class="form-group">
+											<strong>Board No:</strong>
+											<input type="text" class="form-control"  name="board_no" placeholder="board_no" value="{{ $product->board_no;}}" > 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-6">
+										<div class="form-group">
+											<strong>Compatible Model:</strong>
+											<input type="text" class="form-control"  name="compatible_model" placeholder="compatible_model" value="{{ $product->compatible_model;}}" > 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-3">
+										<div class="form-group">
+											<strong> Selling Price:</strong>
+											<input type="text" class="form-control"  name="product_selling_price" placeholder="product_selling_price" value="{{ $product->product_selling_price;}}" > 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-3">
+										<div class="form-group">
+											<strong>Cost Price:</strong>
+											<input type="text" class="form-control"  name="product_cost_price" placeholder="product_cost_price" value="{{ $product->product_cost_price;}}" > 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-3">
+										<div class="form-group">
+											<strong>Currency Unit:</strong>
+											<input type="text" class="form-control"  name="currency_unit" placeholder="currency_unit" value="{{ $product->currency_unit;}}" > 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-3">
+										<div class="form-group">
+											<strong>Product Qty Avail:</strong>
+											<input type="text" class="form-control"  name="product_qty_avail" placeholder="product_qty_avail" value="{{ $product->product_qty_avail;}}"> 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-6">
+										<div class="form-group">
+											<strong>Product Main Image:</strong>
+											<input type="text" class="form-control"  name="product_image1" placeholder="product_image1" value="{{ $product->product_image1;}}" > 
+										</div>
+									</div>
+
+									
+
+									<div class="col-xs-12 col-sm-12 col-md-12">
+										<div class="form-group">
+											<strong>Amazon Link:</strong>
+											<input type="text" class="form-control"  name="amazon_link" placeholder="amazon_link" value="{{ $product->amazon_link;}}" > 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-12">
+										<div class="form-group">
+											<strong>Facebook Link:</strong>
+											<input type="text" class="form-control"  name="facebook_link" placeholder="facebook_link" value="{{ $product->facebook_link;}}"> 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-12">
+										<div class="form-group">
+											<strong>Kijiji Link:</strong>
+											<input type="text" class="form-control"  name="kijiji_link" placeholder="kijiji_link" value="{{ $product->kijiji_link;}}" > 
+										</div>
+									</div>
+
+									<div class="col-xs-12 col-sm-12 col-md-12">
+										<div class="form-group">
+											<strong>Product Desc:</strong>
+											<input type="text" class="form-control"  name="product_desc" placeholder="product_desc" value="{{ $product->product_desc;}}" > 
+										</div>
+									</div>
+
+									
+
+
+									<div class="col-xs-12 col-sm-12 col-md-12 text-center">
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</div>
+								</div>
+							</form>
+
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+					<!-- /.col -->
+				</div>
+				<!-- /.row -->
+			</div>
+			<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
 	</div>
-</div>
-@if ($errors->any())
-<div class="alert alert-danger">
-	<strong>Whoops!</strong> There were some problems with your input.<br><br>
-	<ul>
-		@foreach ($errors->all() as $error)
-		<li>{{ $error }}</li>
-		@endforeach
-	</ul>
-</div>
-@endif
-<form action="{{ route('products.update',$product->id) }}" method="POST">
-	@csrf
-	@method('PUT')
-	<div class="row">
-		
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>product_name:</strong>
-				<input type="text" name="product_name" value="{{ $product->name }}" class="form-control" placeholder="product_name">
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>part_no:</strong>
-				<textarea class="form-control" style="height:150px" name="part_no" placeholder="part_no">{{ $product->part_no }}</textarea>
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>board_no:</strong>
-				<textarea class="form-control" style="height:150px" name="board_no" placeholder="board_no">{{ $product->board_no }}</textarea>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>compatible_model:</strong>
-				<textarea class="form-control" style="height:150px" name="compatible_model" placeholder="compatible_model">{{ $product->compatible_model }}</textarea>
-			</div>
-		</div>
-
-		
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>product_selling_price:</strong>
-				<textarea class="form-control" style="height:150px" name="product_selling_price" placeholder="product_selling_price">{{ $product->product_selling_price }}</textarea>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>product_cost_price:</strong>
-				<textarea class="form-control" style="height:150px" name="product_cost_price" placeholder="product_cost_price">{{ $product->product_cost_price }}</textarea>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>product_qty_avail:</strong>
-				<textarea class="form-control" style="height:150px" name="product_qty_avail" placeholder="product_qty_avail">{{ $product->product_qty_avail }}</textarea>
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>product_image1:</strong>
-				<textarea class="form-control" style="height:150px" name="product_image1" placeholder="product_image1">{{ $product->product_image1 }}</textarea>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>currency_unit:</strong>
-				<textarea class="form-control" style="height:150px" name="currency_unit" placeholder="currency_unit">{{ $product->currency_unit }}</textarea>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>amazon_link:</strong>
-				<textarea class="form-control" style="height:150px" name="amazon_link" placeholder="amazon_link">{{ $product->amazon_link }}</textarea>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>facebook_link:</strong>
-				<textarea class="form-control" style="height:150px" name="facebook_link" placeholder="facebook_link">{{ $product->facebook_link }}</textarea>
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>kijiji_link:</strong>
-				<textarea class="form-control" style="height:150px" name="kijiji_link" placeholder="kijiji_link">{{ $product->kijiji_link }}</textarea>
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>product_desc:</strong>
-				<textarea class="form-control" style="height:150px" name="product_desc" placeholder="product_desc">{{ $product->product_desc }}</textarea>
-			</div>
-		</div>
-
-		<div class="col-xs-12 col-sm-12 col-md-12">
-			<div class="form-group">
-				<strong>timestamps:</strong>
-				<textarea class="form-control" style="height:150px" name="timestamps" placeholder="timestamps">{{ $product->timestamps }}</textarea>
-			</div>
-		</div>
-
-
-		<div class="col-xs-12 col-sm-12 col-md-12 text-center">
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</div>
-	</div>
-</form>
-@endsection
+	@endsection

@@ -3,26 +3,26 @@
 'elementActive' => 'home'
 ])
 @push('styles')
-<link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet" href="assets/AdminLTE-3.1.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }} ">
+<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }} ">
+<link rel="stylesheet" href="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }} ">
 
 
 @endpush
 
 @push('scripts')
-<script src="assets/AdminLTE-3.1.0/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/jszip/jszip.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables/jquery.dataTables.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-responsive/js/dataTables.responsive.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/dataTables.buttons.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/jszip/jszip.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/pdfmake/pdfmake.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/pdfmake/vfs_fonts.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.print.min.js') }} "></script>
+<script src="{{ URL::to('assets/AdminLTE-3.1.0/plugins/datatables-buttons/js/buttons.colVis.min.js') }} "></script>
 
 
 <script type="text/javascript">
@@ -63,11 +63,6 @@
 </script>
 @endpush
 @section('content')
-
-
-
-
-
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -101,6 +96,12 @@
 							</div>
 
 							@endif
+							<a href="{{ route('admin.products.create') }}" style="float:right;">
+								<i class="nav-icon far fa-plus"></i>
+								<p>
+									Add
+								</p>
+							</a>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">

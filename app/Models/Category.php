@@ -12,10 +12,26 @@ class Category extends Model
         'title',
         'slug',
         'photo',
-        'is_parent',
         'summary',
         'parent_id',
         'status'
         
     ];
+
+     
+
+   /* public function subcategories(){
+        return $this->hasMany('App\Models\Category', 'parent_id');
+    }*/
+
+      public function subcategory()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+    
 }

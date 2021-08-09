@@ -33,7 +33,7 @@
         @if($role == "admin")
           <li class="nav-header">Product Management</li>
           <li class="nav-item">
-            <a href="products" class="nav-link">
+            <a href="{{ route('products') }}" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Products
@@ -62,7 +62,7 @@
          @endif 
           @if($role == "admin")
           <li class="nav-item">
-            <a href="/importExportView" class="nav-link">
+            <a href="{{ route('importExportView') }}" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Product Import/Export
@@ -72,8 +72,19 @@
           @endif 
           @if($role == "admin")
 
+<li class="nav-item">
+            <a href="{{ route('admin.categories.index') }}" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+               Category
+              </p>
+            </a>
+          </li>
+
+
+
           <li class="nav-item">
-            <a href="/send-mail" class="nav-link">
+            <a href="{{ route('send-mail') }}" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Send Email Demo
@@ -82,7 +93,7 @@
           </li>
 
 <li class="nav-item">
-            <a href="file:///C:/xampp/htdocs/IMSL1/public/assets/AdminLTE-3.1.0/index.html" class="nav-link">
+            <a href="C:/xampp/htdocs/IMSL1/public/assets/AdminLTE-3.1.0/index.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Theme Demo
